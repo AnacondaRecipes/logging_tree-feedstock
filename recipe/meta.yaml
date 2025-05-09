@@ -11,25 +11,34 @@ source:
 
 build:
   number: 0
-  noarch: python
-  script: {{ PYTHON }} -m pip install . --no-deps -vv
+  script: {{ PYTHON }} -m pip install . --no-deps -v --no-build-isolation
 
 requirements:
   host:
-    - python >=3.6
+    - python
     - pip
+    - setuptools
+    - wheel
   run:
-    - python >=3.6
+    - python
 
 test:
+  requires:
+    - pip
   imports:
     - logging_tree
+  commands:
+    - pip check
 
 about:
   home: https://github.com/brandon-rhodes/logging_tree
   license: BSD-3-Clause
+  license_family: BSD
   license_file: COPYRIGHT
   summary: Introspect and display the logger tree inside "logging"
+  description: Introspection for the `logging` logger tree in the Standard Library.
+  doc_url: https://github.com/brandon-rhodes/logging_tree/blob/master/README.md
+  dev_url: https://github.com/brandon-rhodes/logging_tree
 
 extra:
   recipe-maintainers:
